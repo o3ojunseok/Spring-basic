@@ -1,7 +1,7 @@
 package Springbasic.core;
 
 import Springbasic.core.discount.DiscountPolicy;
-import Springbasic.core.discount.FixDiscountPolicy;
+import Springbasic.core.discount.RateDiscountPolicy;
 import Springbasic.core.member.MemberService;
 import Springbasic.core.member.MemberServiceImpl;
 import Springbasic.core.member.MemoryMemberRepository;
@@ -33,6 +33,8 @@ public class AppConfig {
     }
 
     public DiscountPolicy discountPolicy() {
-        return new FixDiscountPolicy();
+//        return new FixDiscountPolicy();
+        // fix -> rate로 변경하였지만, AppConfig인 구성영역만 변경했지 그외 사용영역들은 전혀 변경하지 않고도 애플리케이션의 기능을 확장 가능
+        return new RateDiscountPolicy();
     }
 }
