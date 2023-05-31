@@ -3,6 +3,8 @@ package Springbasic.core;
 import Springbasic.core.member.Grade;
 import Springbasic.core.member.Member;
 import Springbasic.core.member.MemberService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MemberApp {
     public static void main(String[] args) {
@@ -10,8 +12,12 @@ public class MemberApp {
 
 
         // 직접 memberService를 생성하는것이 아닌, appconfig에서 불러온다.
-        AppConfig appConfig = new AppConfig();
-        MemberService memberService = appConfig.memberService();
+//        AppConfig appConfig = new AppConfig();
+//        MemberService memberService = appConfig.memberService();
+
+        // spring 전환
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class); // appconfig에 있는 환경설정 정보를 가지고 스프링이 컨테이너에 알아서 객체 등록해준다.
+        MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
 
         Member member = new Member(1L, "memberA", Grade.VIP);
         memberService.join(member);
